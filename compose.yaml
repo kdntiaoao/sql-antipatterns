@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql
+    container_name: sql-antipatterns-playground
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: playground
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./samples/Introduction/setup.sql:/docker-entrypoint-initdb.d/01-setup.sql:ro
+
+volumes:
+  mysql-data:
